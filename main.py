@@ -69,18 +69,5 @@ def create_tabel():
     ct=ct+" \n);"
     print(ct)
     cursor.execute(ct)
-
-def alter_tabel():
-    table_name=input("enter table name to alter")
-    alter_command="AlTER TABLE "+table_name
-    print("enter 1 to change column name \n enter 2 to change collumn datatype \n enter 3 to change key \n" )
-    choice_alter=input("enter choice")
-    if choice_alter==1:
-        col_name=
-        alter_command+
-
-    #add collumn 
-    col_name+input("enter collumn name : ")
-
 #main loop
 create_tabel()
