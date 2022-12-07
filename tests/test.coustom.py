@@ -1,51 +1,23 @@
-import tkinter
-import tkinter.messagebox
-import customtkinter
+from tkinter import *
+import tkinter as tk
+my_w = tk.Tk()
+my_w.geometry("350x100") 
+font1=('Times',18,'bold')	
+sv = tk.StringVar() # connected to 1st Label and Spinbox
+        
+l1=tk.Label(my_w,text='Password',font=font1)  
+l1.grid(row=1,column=1,padx=10,pady=10)
+e1_str=tk.StringVar() # string variable   
+e1 = tk.Entry(my_w,font=font1,width=15,show='*',textvariable=e1_str)
+e1.grid(row=1,column=2,padx=5,pady=5)
+c_v1=IntVar(value=0)
+def my_show():
+    if(c_v1.get()==1):
+        e1.config(show='')
+    else:
+        e1.config(show='*')
 
-customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
-customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
-
-
-class App(customtkinter.CTk):
-    def __init__(self):
-        super().__init__()
-
-        # configure window
-        self.title("CustomTkinter complex_example.py")
-        self.geometry(f"{1100}x{580}")
-
-        # configure grid layout (4x4)
-        self.grid_columnconfigure(1, weight=1)
-        self.grid_columnconfigure((2, 3), weight=0)
-        self.grid_rowconfigure((0, 1, 2), weight=1)
-
-        # create sidebar frame with widgets
-        self.sidebar_frame = customtkinter.CTkFrame(self, width=140, corner_radius=0)
-        self.sidebar_frame.grid(row=0, column=0, rowspan=4, sticky="nsew")
-        self.sidebar_frame.grid_rowconfigure(4, weight=1)
-        self.logo_label = customtkinter.CTkLabel(self.sidebar_frame, text="CustomTkinter", font=customtkinter.CTkFont(size=20, weight="bold"))
-        self.logo_label.grid(row=0, column=0, padx=20, pady=(20, 10))
-        self.sidebar_button_1 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
-        self.sidebar_button_1.grid(row=1, column=0, padx=20, pady=10)
-        self.sidebar_button_2 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
-        self.sidebar_button_2.grid(row=2, column=0, padx=20, pady=10)
-        self.sidebar_button_3 = customtkinter.CTkButton(self.sidebar_frame, command=self.sidebar_button_event)
-        self.sidebar_button_3.grid(row=3, column=0, padx=20, pady=10)
-        self.appearance_mode_label = customtkinter.CTkLabel(self.sidebar_frame, text="Appearance Mode:", anchor="w")
-        self.appearance_mode_label.grid(row=5, column=0, padx=20, pady=(10, 0))
-        self.appearance_mode_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["Light", "Dark", "System"],
-                                                                       command=self.change_appearance_mode_event)
-        self.appearance_mode_optionemenu.grid(row=6, column=0, padx=20, pady=(10, 10))
-        self.scaling_label = customtkinter.CTkLabel(self.sidebar_frame, text="UI Scaling:", anchor="w")
-        self.scaling_label.grid(row=7, column=0, padx=20, pady=(10, 0))
-        self.scaling_optionemenu = customtkinter.CTkOptionMenu(self.sidebar_frame, values=["80%", "90%", "100%", "110%", "120%"],
-                                                               command=self.change_scaling_event)
-        self.scaling_optionemenu.grid(row=8, column=0, padx=20, pady=(10, 20))
-
-
-
-
-    # if __name__ == "__main__":
-    #     app = App()
-    #     app.mainloop()
-    
+c1 = tk.Checkbutton(my_w,text='Show Password',variable=c_v1,
+	onvalue=1,offvalue=0,command=my_show)
+c1.grid(row=2,column=1)    
+my_w.mainloop()  # Keep the window open
