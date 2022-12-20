@@ -8,9 +8,10 @@ customtkinter.set_appearance_mode("Dark")  # Modes: "System" (standard), "Dark",
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
 class App(customtkinter.CTk):
+    check_var = tk.StringVar("on")
     def __init__(self):
         super().__init__()
-        self.check_var = tk.StringVar("on")
+        
         self.title("Inventory Management System")
         self.geometry(f"{1000}x{700}")
         self.entry = customtkinter.CTkEntry(self, placeholder_text="username")
@@ -41,8 +42,7 @@ class App(customtkinter.CTk):
         #                          command=self.show,
         #                          ).place(relx=0.6, rely=0.5, anchor=tkinter.CENTER)
         self.checkbox = customtkinter.CTkCheckBox(self, text="show passowrd", command=self.checkbox_event,
-                                     variable=self.check_var, onvalue="on", offvalue="off").place(relx=0.65, rely=0.5, anchor=tkinter.CENTER)
-        self.check_var = tkinter.StringVar("on")
+                                     variable=App.check_var, onvalue="on", offvalue="off").place(relx=0.65, rely=0.5, anchor=tkinter.CENTER)
 
     def submitbutton_event(self):
         print("button pressed")
@@ -51,7 +51,7 @@ class App(customtkinter.CTk):
         print("Username : ",username ,"\nPassword : ",password)
     
     def checkbox_event(self):
-        print("checkbox toggled, current value:", self.check_var.get())
+        print("checkbox toggled, current value:", App.check_var.get())
         
 app = App()
 app.mainloop()

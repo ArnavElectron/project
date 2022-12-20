@@ -1,24 +1,11 @@
 import tkinter
 import customtkinter
 
+check_var = tkinter.StringVar("on")
 
-class ExampleApp(customtkinter.CTk):
-    def __init__(self):
-        super().__init__()
+def checkbox_event():
+    print("checkbox toggled, current value:", check_var.get())
 
-        self.geometry("500x400")
-
-        self.button = customtkinter.CTkButton(self, text="Create Toplevel", command=self.create_toplevel)
-        self.button.pack(side="top", padx=40, pady=40)
-
-    def create_toplevel(self):
-        window = customtkinter.CTkToplevel(self)
-        window.geometry("400x200")
-
-        # create label on CTkToplevel window
-        label = customtkinter.CTkLabel(window, text="CTkToplevel window")
-        label.pack(side="top", fill="both", expand=True, padx=40, pady=40)
-
-
-app = ExampleApp()
-app.mainloop()
+checkbox = customtkinter.CTkCheckBox(master=root_tk, text="CTkCheckBox", command=checkbox_event,
+                                     variable=check_var, onvalue="on", offvalue="off")
+checkbox.pack(padx=20, pady=10)
