@@ -1,0 +1,6 @@
+CREATE TABLE Users(
+username VARCHAR(500) UNIQUE,
+passwrod VARCHAR(500),
+id_create_date VARCHAR(100),
+last_login VARCHAR(100),
+usertype VARCHAR(20));
