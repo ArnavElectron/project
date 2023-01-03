@@ -18,35 +18,67 @@ def userlogin():
     checkpass="SELECT passwrod from users where username=\""+username+"\""
     #print(checkpass) #debuging
     cursor.execute(checkpass)
-    fet=cursor.fetchall()[0][0]
-    #print(fet) #debuging
-    password_in_db=fet
+    fet=cursor.fetchall()
+    #print("hello output",fet[0][0]) #debuging
+    password_in_db=fet[0][0]
     hasher=hashlib.sha256(password.encode())
     password=hasher.hexdigest()
+    #print(password)
     if password_in_db==password:
         cursor.execute("SELECT USERTYPE from users where username=\""+username+"\"")
+        ts=str(datetime.now())
+        update="update users set last_login="+"\""+ts+"\" where username=\""+username+"\""
         d=cursor.fetchall()[0][0]
-
+        cursor.execute(update)
+        cnx.commit()
         return(d)
-    else:
+        
+    elif password_in_db!=password:
         print("wrong password  ")
+        userlogin()
         
 def new_user():
     username=input("enter username")
+    cursor.execute("select count(*) from users where username=\""+username+"\"")
+    check=cursor.fetchall()[0][0]
+    if check>=1:
+        print("username exists")
+        new_user()
     password=getpass.getpass()
     re_password=getpass.getpass("confirm password")
     while password!=re_password:
         print("Password incorrect!!")
         password=getpass.getpass("enter password: ")
         re_password=getpass.getpass("confirm password: ")
-    usertypeli=["admin","manager","floor manager","tecnitian","guest_user"]
-    #print("enter 1 for admin \n enter 2 for manager \n enter 3 for floor manager \n enter 4 for techniation \n enter 5 for guest_user") #debuging 
-    c=int(input("enter choice"))
-    usertype=usertypeli[c-1]
-    hashed_pass=hasher=hashlib.sha256(password.encode())
-    password=hasher.hexdigest()
-    ts=str(datetime.now())
-    cursor.execute("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");")
-    #print("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");") #debuging
-    cnx.commit()
-
+    usertypeli=["Admin","Genral_Manager","Floor_Manager","Tecnitian","Guest_User"]
+    print("enter 1 for Admin \n enter 2 for Genral Manager \n enter 3 for Floor Manager \n enter 4 for Techniation \n enter 5 for Guest_User") #debuging 
+    c=int(input("enter choice1"))
+    adminpass="admin@123"
+    if c==1:
+        eadminpass=getpass.getpass("ask an admin to enter admin password:")
+        if adminpass==eadminpass:
+            usertype=usertypeli[c-1]
+            hashed_pass=hasher=hashlib.sha256(password.encode())
+            password=hasher.hexdigest()
+            ts=str(datetime.now())
+            cursor.execute("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");")
+            cnx.commit()
+        else:
+            print("enter another choice")
+            print("enter 1 for Admin() \n enter 2 for Genral Manager \n enter 3 for Floor Manager \n enter 4 for Techniation \n enter 5 for Guest_User") #debuging 
+            c=int(input("enter choice"))
+            usertype=usertypeli[c-1]
+            hashed_pass=hasher=hashlib.sha256(password.encode())
+            password=hasher.hexdigest()
+            ts=str(datetime.now())
+            cursor.execute("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");")
+            #print("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");") #debuging
+            cnx.commit()
+    else:
+        usertype=usertypeli[c-1]
+        hashed_pass=hasher=hashlib.sha256(password.encode())
+        password=hasher.hexdigest()
+        ts=str(datetime.now())
+        cursor.execute("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");")
+        #print("insert into users values\n(\""+username+"\",\""+password+"\",\""+ts+"\",\""+ts+"\",\""+usertype+"\");") #debuging
+        cnx.commit()

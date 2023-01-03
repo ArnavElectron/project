@@ -1,10 +1,12 @@
-import hashlib 
-import getpass
-class login:
-    def __init__(self,username,password):
-        self.username=username 
-        self.password=password
-        print("username",username,"Password",password)
+x=5
+y=9
+def add():
+    z=x+y
+    print(z)
+    return z
+def subtract():
 
-
-c1=login("demon","pass")
+    df=add()
+    df=df-3
+    print(df)
+subtract()
