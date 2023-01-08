@@ -1,60 +1,4 @@
-"""This is inital setup file for demonstration of the program.
-This file has no real world useage except for demonstartion """
-
-
-
-
-
-
-#-----------------------------------------------------------+
-x="helloworld"#enter sql password within quotes here please |
-#-----------------------------------------------------------+
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import mysql.connector as m #importing MySQL connector to comunicate with MySQL server
-from mysql.connector import Error
-
-
-cnx=m.connect(user='root', password=x,host='localhost')
-cursor=cnx.cursor()
-
-
-
-cursor.execute("create database inventory_management_system ")
-inventory='''CREATE TABLE Inventory(
-PartNo VARCHAR(20) UNIQUE,
-Model_no VARCHAR(100) PRIMARY KEY,
-Common_Name VARCHAR(100) NOT NULL,
-Quantity INT,
-datasheet_link LONGTEXT,
-max_voltage VARCHAR(10),
-price_each DOUBLE(10,2),
-stock_price DOUBLE(10,2)
-);'''
-cursor.execute(inventory)
-
-users='''create table users(
-username varchar(500) PRIMARY KEY,
-password varchar(500),
-id_create_date varchar(100),
-last_login varchar(100),
-usertpye varchar(100)
-);'''
-cursor.execute(users)
-
-insert="""insert into inventory values
+"""insert into inventory values
 ("LED001","5MM LED WHITE","LED",500,"http://www1.futureelectronics.com/doc/EVERLIGHT%C2%A0/334-15__T1C1-4WYA.pdf","3V",1.5,750),
 ("LED002","5MM LED GREEN","LED",500,"http://www1.futureelectronics.com/doc/EVERLIGHT%C2%A0/334","3V",1.5,750),
 ("LED003","5MM LED RED","LED",500,"http://www1.futureelectronics.com/doc/EVERLIGHT%C2%A0/334","3V",1.5,750),
@@ -99,12 +43,3 @@ insert="""insert into inventory values
 ("R020","2ohm 5W","RESISTOR",100,"https://www.mouser.in/datasheet/2/418/3/NG_CS_1309350_PASSIVE_COMPONENT_0807-1235562.pdf","100V",10,1000),
 ("D001","1N4007","DIODE",700,"https://pdf1.alldatasheet.com/datasheet-pdf/view/14624/PANJIT/1N4007.html","700v",5,300),
 ("D002","1n4148","DIODE",500,"https://pdf1.alldatasheet.com/datasheet-pdf/view/190208/WTE/1N4148.html","100v",5,2500);"""
-
-cursor.execute(insert)
-
-usersdata="""insert into users values 
-("admin","8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918","2023-01-05 22:56:43.429940","2023-01-05 22:56:43.429940","Admin")"""
-
-cursor.execute(usersdata)
-
-cnx.commit()

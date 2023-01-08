@@ -14,11 +14,13 @@ INSERT INTO Inventor values(
     
 )
 
-create table main_table
-    PartNO VARCHAR(20) UNIQUE,
-    Model VARCHAR(100) PRIMARY KEY,
-    Common_Name VARCHAR(500),
-    Quantity INT,
+create table users(
+username varchar(500) PRIMARY KEY,
+password varchar(500),
+id_create_date varchar(100),
+last_login varchar(100),
+usertpye varchar(100)
+);
 
 create table Cart
     PartNO VARCHAR(20) UNIQUE,

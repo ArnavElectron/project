@@ -108,3 +108,4 @@ usersdata="""insert into users values
 cursor.execute(usersdata)
 
 cnx.commit()
+

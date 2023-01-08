@@ -49,7 +49,7 @@ def new_user():
         password=getpass.getpass("enter password: ")
         re_password=getpass.getpass("confirm password: ")
     usertypeli=["Admin","Genral_Manager","Floor_Manager","Technician","Guest_User"]
-    print("enter 1 for Admin \n enter 2 for Genral Manager \n enter 3 for Floor Manager \n enter 4 for Technician \n enter 5 for Guest_User") #debuging 
+    print("enter 1 for Admin \n enter 2 for Genral Manager \n enter 3 for Floor Manager \n enter 4 for Techniation \n enter 5 for Guest_User") #debuging 
     c=int(input("enter choice: "))
     adminpass="admin@123"
     if c==1:
