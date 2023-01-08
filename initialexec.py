@@ -1,8 +1,4 @@
-"""This is inital setup file for demonstration of the program.
-This file has no real world useage except for demonstartion """
-
-
-
+'''this is the '''
 
 
 
