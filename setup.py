@@ -28,4 +28,3 @@ cnx = m.connect(user='root', password=x,host='localhost',database='inventory_man
 
 #global variabels and objects
 cursor = cnx.cursor() #creating a cursor object
-

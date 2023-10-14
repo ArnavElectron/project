@@ -103,7 +103,7 @@ def graph_parts_quantity_price():
     query="select partno,quantity,price_each,stock_price from inventory"
     result_dataFrame = pd.read_sql(query,cnx)
     result_dataFrame.index=idx
-    result_dataFrame.plot(kind="bar",color=colors)
+    result_dataFrame.plot(kind="hist",color=colors)
     pl.show()
     #print(result_dataFrame) debuging
 def show_datasheet():
